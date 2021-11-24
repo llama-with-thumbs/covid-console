@@ -1,0 +1,693 @@
+* {
+  vertical-align: baseline;
+	font-weight: inherit;
+	font-family: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	border: 0 none;
+	outline: 0;
+	padding: 0;
+	margin: 0;
+  box-sizing: border-box;
+
+  color: rgb(216, 216, 216);
+}
+
+*:focus
+{
+  outline: none;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #4c4c4c;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+html {
+  font-size: 16px;
+  /* height: 100vh; */
+  /* width: 100vw; */
+  margin: 0;
+  padding: 0;
+
+}
+
+body {
+  font-size: 100%;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: black;
+  font-family: 'Quicksand', sans-serif;
+
+  /* height: 100vh; */
+  padding: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1.1fr 3fr repeat(2, .95fr);
+  grid-template-rows: 0.3fr 0.9fr 0.3fr 2fr 1fr 0.3fr 0.3fr;
+  gap: 5px;
+  /* width: 100vw; */
+  margin: 0px auto 0px auto;
+  height: 100vh;
+  transition: .5s;
+  padding: 0;
+  margin: 0;
+  grid-template-areas:
+    "header header header header"
+    "global_cases map recoveries deaths"
+    "global_cases map charts charts"
+    "countries map charts charts"
+    "countries map charts charts"
+    "updated map charts charts"
+    "updated footer charts charts";
+
+}
+
+.header {
+display: flex;
+align-items: center;
+justify-content: center;
+grid-area: header;
+
+}
+
+.header__logo {
+grid-area: header__logo;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+margin-top: 2px;
+}
+
+.header__title {
+grid-area: header__title;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+color: #bdbdbd;
+margin-left: 5px;
+font-size: 130%;
+}
+
+.footer {
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+grid-area: footer;
+}
+.footer__git {
+grid-area: footer__git;
+display: flex;
+flex-wrap: nowrap;
+align-content: space-between;
+justify-content: start;
+align-items: center;
+padding-left: 5px;
+margin-top: 5px;
+}
+.footer__year {
+  display: flex;
+  justify-content: center;
+}
+.footer__rss {
+grid-area: footer__rss;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.map {
+display: block;
+z-index: 0;
+grid-template-columns: 1fr 2fr 1fr;
+grid-template-rows: 1.85fr 0.15fr;
+gap: 0px 0px;
+grid-template-areas:
+    "map__image map__image map__image"
+    "map__left map__input map__right";
+grid-area: map;
+overflow: hidden;
+}
+/*.map__image { grid-area: map__image; }*/
+/*.map__input { grid-area: map__input; }*/
+/*.map__left { grid-area: map__left; }*/
+/*.map__right { grid-area: map__right; }*/
+.global_cases {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+  font-size: 1.4rem;
+  grid-area: global_cases;
+}
+.updated {
+  font-size: .9rem;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  align-items: center;
+  grid-area: updated;
+  text-align: center;
+  background-color: rgb(64, 64, 64);
+  }
+
+.csv__wrapper {
+  font-size: .6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chart__note {
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  font-weight: bold;
+  padding: 4px 8px;
+
+  background-color: wheat;
+  color: #292929;
+  
+  margin: 15%;
+  text-align: center;
+  width: 120px;
+  position: absolute;
+}
+.charts {
+  font-size: 10px;
+  grid-area: charts;
+  padding: 25px;
+    
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+/* .charts svg * {
+  color: black;
+} */
+.charts svg {
+  background-color: rgb(80, 80, 80);
+  padding-right: 10px;
+}
+.sum-chart, .daily-chart {
+  display: flex;
+  flex-direction: column;
+}
+.charts-title{
+  display: flex;
+  font-size: 1rem;
+  align-self: flex-start;
+}
+.daily-chart-title, .sum-chart-title {
+  align-self: flex-end;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+.sum-chart, .daily-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  width: 100%;
+  min-height: 250px;
+}
+
+tr.active {
+  background-color: #5c5b5b;
+}
+.countries tr {
+  cursor: pointer;
+  padding: 0 5px 0 5px;
+}
+.countries tr:hover{
+  background-color: #5c5b5b;
+  color: white;
+}
+svg {
+  display: block;
+}
+rect {
+  fill: steelblue;
+}
+.y.axis line, .x.axis line {
+  fill : none;
+  stroke: #cfcfcf;
+}
+.x.axis .tick:first-of-type text {
+  transform: translateX(10px);
+}
+.x.axis .tick:last-of-type text {
+  transform: translateX(-10px);
+}
+.y.axis .tick:first-of-type text {
+  transform: translateY(-5px);
+}
+.y.axis .tick:last-of-type text {
+  transform: translateY(0px);
+}
+.axis path,
+.axis line {
+fill: none;
+stroke: #000;
+shape-rendering: crispEdges;
+}
+#map {
+  z-index: 1;
+}
+.legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  position: absolute;
+  top: 72%;
+  left: 20%;
+  line-height: 18px;
+  color: wheat;
+  border-radius: 10px;
+  background: rgb(84, 84, 84);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  padding:10px;
+  height: 200px;
+  width:100px;
+  line-height: 18px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  padding: 0 10px;
+}
+
+.red__text {
+  font-weight: bold;
+  color: red;
+}
+.dark-red__text {
+  font-weight: bold;
+  color: red;
+}
+
+.charts__diagram { grid-area: charts__diagram; }
+.charts__left { grid-area: charts__left; }
+.charts__right { grid-area: charts__right; }
+.charts__input { grid-area: charts__input; }
+.countries {
+  /* overflow-x: scroll; */
+  /* padding-left: 8px;
+  padding-right: 4px; */
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  grid-area: countries;
+  scroll-behavior: smooth;
+}
+.countries .quantity {
+  font-size: .9rem;
+  font-weight: normal;
+  color: red;
+}
+.county-flag-cell {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+hr, hr.line { 
+  display: block;
+  margin-bottom: 0.5em;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-color: #292929;
+  border-width: 1px;
+} 
+hr.light__line {
+  border-color: #444444;
+  margin: 0;
+  text-align: right;
+  width: 100%;
+}
+
+.countries__table { grid-area: countries__table; }
+.countries__input { grid-area: countries__input; }
+.countries__left { grid-area: countries__left; }
+.countries__right { grid-area: countries__right; }
+.deaths {
+  overflow-y: scroll;
+  grid-area: deaths;
+}
+.deaths__table { grid-area: deaths__table; }
+.deaths__left { grid-area: deaths__left; }
+.deaths__right { grid-area: deaths__right; }
+.deaths__input { grid-area: deaths__input; }
+.recoveries {
+  overflow-x: hidden;
+  overflow-y: scroll;
+ 
+  grid-area: recoveries;
+}
+.smaller {
+  font-size: .7em;
+}
+.red{
+  color: red;
+}
+.black{
+  color: black;
+  font-weight: bold;
+}
+.countries__table tr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px black;
+}
+.country-name {
+  text-align: right;
+  display: flex;
+  justify-self: flex-end;
+  justify-content: flex-end;
+  align-items: center;
+}
+.county-flag {
+  margin-left: 5px;
+}
+.death__header, .recovered__header, .countries__header {
+  text-align: center;
+  font-size: 1.5rem;
+}
+.recov__table { grid-area: recov__table; }
+.recov__input { grid-area: recov__input; }
+.recov__left { grid-area: recov__left; }
+.recov__right { grid-area: recov__right; }
+
+.footer-icon a img {
+  height: 1.5em;
+}
+
+.footer-icon:hover  {
+  transform: scale(1.01);
+  filter: invert(1);
+  transition: all .1s ease-in-out;
+}
+
+.header__logo a img {
+  height: 2em;
+  width: auto;
+}
+
+.header__logo a img:hover {
+  transform: rotate(360deg);
+  transition: 3s;
+}
+
+.header, .footer, .map, .charts, .countries, .global_cases, .deaths, .recoveries, .updated {
+
+  background-color: rgb(64, 64, 64);
+  border: #4c4c4c solid 0.1em;
+  border-radius: 1px;
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  max-width: 70%;
+  position: relative;
+}
+
+.input input{
+  margin: 3px;
+  max-width: 130px;
+  background-color: transparent;
+  border: solid 0.1em #4c4c4c;
+  position: absolute;
+}
+
+.input input:hover, .input input:focus{
+  background-color: #4c4c4c;
+}
+
+.btn-left {
+   display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px 2px;
+}
+
+.btn-right {
+  display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 2px;
+}
+
+.btn-left:hover, .btn-right:hover {
+  transform: scale(1.05);
+  transition: all 0.5s ease-in-out;
+  filter: drop-shadow(2px 4px 6px #ffffff);
+}
+
+/*все для карты*/
+#map {
+  height: 100%;
+  width: 100%;
+  /*display: table-column;*/
+}
+
+
+.icon-marker {
+
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  /* width: 4em;
+  height: 4em; */
+  font-size: .7em;
+  font-weight: bold;
+  /* opacity: .8; */
+  border-radius: 100%;
+}
+.leaflet-interactive {
+  stroke-opacity: 0;
+  fill: rgb(255, 0, 0);
+  
+  fill-opacity: 0.3;
+}
+
+.icon-marker:hover .icon-marker-tooltip {
+  display: block;
+  padding-left: 20px;
+}
+
+.icon-marker-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  width: 16em;
+  font-size: 1.4em;
+  padding: 1em;
+  background-color: #292929;
+  border-radius: .4em;
+  margin-bottom: 1em;
+}
+
+.icon-marker-tooltip:before {
+  display: block;
+  position: absolute;
+  bottom: -.6em;
+  left: 50%;
+  content: '';
+  width: 1.4em;
+  height: 1.4em;
+  background-color: #292929;
+  transform: rotate(45deg);
+  margin-left: -.7em;
+}
+.deaths__table, .recov__table{  
+  text-align: left;
+}
+.deaths, .recoveries {
+  padding: 10px;
+}
+.quantity__cases, .global_cases__number{
+  font-weight: bold;
+  color: darkred;
+}
+.global_cases__number{
+  color: red;
+}
+
+@media screen and (max-width: 850px) {
+  .legend {
+    left: 5%;
+    top: 45%;
+  }
+
+  html {
+    height: auto;
+  }
+  body {
+    height: auto;
+  }
+  .grid-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: hidden;
+  }
+  .header {
+    text-align: center;
+    order: 0;
+  }
+  .charts{
+    /* margin: 0 20px; */
+    padding: 5px 20px;
+    order: 1;
+  }
+  .map {
+    padding: 5px 20px;
+    order: 1;
+    position: relative;
+    /* overflow: visible; */
+    height: 400px;
+  }
+  #map {
+    width: 100%;
+    height: 400px;
+  }
+  .updated {
+    order: 0;
+  }
+  .countries {
+    padding: 5px 20px;
+    display: flex;
+    height: 400px;
+    order: 2;
+    
+  }
+  .global_cases {
+    display: flex;
+    order: 0;
+  }
+  .global_cases > *{
+    align-self: center;
+  }
+  .recoveries {
+    order: 6;
+  }
+  .deaths {
+    order: 7;
+  }
+  .footer {
+    order: 8;
+  }
+  .box,.popup{
+    display: none;
+  }
+}
+/* overlay */
+.box {
+  margin: 0 auto;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.button {
+  font-size: 1em;
+  padding: 5px 10px;
+  border: 2px solid rgb(56, 56, 56);
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+}
+.button:hover {
+  background: rgb(56, 56, 56);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  color: #333;
+  padding: 20px;
+  background: rgb(214, 214, 214);
+  border-radius: 2px;
+  width: 30%;
+  position: relative;
+  transition: all 2s ease-in-out;
+  z-index: 5;
+}
+
+.popup .close {
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  transition: all 100ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: rgb(216, 27, 27);
+}
+.popup .content {
+  padding: 20px;
+  max-height: 30%;
+  overflow: auto;
+}
+.popup .content h3{
+  margin: 20px 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.popup .content * {
+  color: #333;
+  text-align: left;
+}
+.popup .content a {
+  color: #333;
+  text-decoration: underline;
+}
+.popup .content ul {
+  list-style-position: outside;
+  padding-left: 5px;
+}
