@@ -726,13 +726,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-console.log((_assets_covid_data_csv__WEBPACK_IMPORTED_MODULE_5___default()));
-
 const Chart = (countyName) => {
   const currDate = new Date();
   const newCountry = countyName.toLowerCase();
 
-  if (countyName === "total") {
+  if (countyName === 'total') {
     const defaultSumData = _assets_covid_data_csv__WEBPACK_IMPORTED_MODULE_5___default().map((d) => {
       const cases = +d[1];
       const date = new Date(d[0]);
@@ -743,23 +741,21 @@ const Chart = (countyName) => {
       const date = new Date(d[0]);
       return { cases, date };
     });
-      (0,_sum_chart_sum_chart_js__WEBPACK_IMPORTED_MODULE_3__["default"])(countyName, defaultSumData);
-      (0,_daily_chart_daily_chart_js__WEBPACK_IMPORTED_MODULE_2__["default"])(countyName, defaultDailyData);
+    (0,_sum_chart_sum_chart_js__WEBPACK_IMPORTED_MODULE_3__["default"])(countyName, defaultSumData);
+    (0,_daily_chart_daily_chart_js__WEBPACK_IMPORTED_MODULE_2__["default"])(countyName, defaultDailyData);
   } else {
     (0,d3__WEBPACK_IMPORTED_MODULE_4__.json)(
-      `https://api.covid19api.com/dayone/country/${newCountry}/status/confirmed`
+      `https://api.covid19api.com/dayone/country/${newCountry}/status/confirmed`,
     ).then((data) => {
       (0,_sum_chart_sum_chart_js__WEBPACK_IMPORTED_MODULE_3__["default"])(countyName, data);
       (0,_daily_chart_daily_chart_js__WEBPACK_IMPORTED_MODULE_2__["default"])(countyName, data);
     });
   }
-
-  
-  return " ";
+  return ' ';
 };
 
 const getCountryName = (data, filter) => {
-  if (filter === "world") return "total";
+  if (filter === 'world') return 'total';
   const dataFiltered = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.filterById)(data, filter);
   const countryData = dataFiltered.countries[0];
   const name = countryData.country;
@@ -768,8 +764,6 @@ const getCountryName = (data, filter) => {
 
 const makeChartsMarkup = (data, filter) => {
   const name = getCountryName(data, filter);
-
-  // console.log(data, filter);
   const markup = Chart(name);
   return markup;
 };
@@ -1220,6 +1214,35 @@ class Deaths extends _abstract_component_js__WEBPACK_IMPORTED_MODULE_0__["defaul
     this.setClickHandler();
   }
 }
+
+/***/ }),
+
+/***/ "./src/components/footer/footer.component.js":
+/*!***************************************************!*\
+  !*** ./src/components/footer/footer.component.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "footer": () => (/* binding */ footer)
+/* harmony export */ });
+/* harmony import */ var _assets_icon_Octocat_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/icon/Octocat.png */ "./src/assets/icon/Octocat.png");
+/* harmony import */ var _assets_icon_GitHub_Logo_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/icon/GitHub_Logo.png */ "./src/assets/icon/GitHub_Logo.png");
+
+
+// import './footer.style.scss';
+
+const footer = `<div class="footer__git footer-icon">
+<a href="https://github.com/llama-with-thumbs/covid/tree/covid-dashboard">
+  <img src="${_assets_icon_Octocat_png__WEBPACK_IMPORTED_MODULE_0__}" alt="github-llama-with-thumbs" title="app's repo">
+</a>
+<a href="https://github.com/llama-with-thumbs/covid/tree/covid-dashboard/README.md">
+  <img src="${_assets_icon_GitHub_Logo_png__WEBPACK_IMPORTED_MODULE_1__}" alt="github-llama-with-thumbs" title="app's repo">
+</a>
+</div>`;
+
 
 /***/ }),
 
@@ -1870,6 +1893,17 @@ const renameObjKeys = (obj) => {
 
 /***/ }),
 
+/***/ "./src/assets/icon/GitHub_Logo.png":
+/*!*****************************************!*\
+  !*** ./src/assets/icon/GitHub_Logo.png ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "746ec8f0bc97208f903e.png";
+
+/***/ }),
+
 /***/ "./src/assets/icon/Octocat.png":
 /*!*************************************!*\
   !*** ./src/assets/icon/Octocat.png ***!
@@ -1878,28 +1912,6 @@ const renameObjKeys = (obj) => {
 
 "use strict";
 module.exports = __webpack_require__.p + "363cb5edea582a89c41f.png";
-
-/***/ }),
-
-/***/ "./src/assets/icon/favicon.png":
-/*!*************************************!*\
-  !*** ./src/assets/icon/favicon.png ***!
-  \*************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "36a09a16b5440be24ccb.png";
-
-/***/ }),
-
-/***/ "./src/assets/icon/github.png":
-/*!************************************!*\
-  !*** ./src/assets/icon/github.png ***!
-  \************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "a3b537146fe31e468854.png";
 
 /***/ }),
 
@@ -35740,12 +35752,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_countries_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controllers/countries.js */ "./src/controllers/countries.js");
 /* harmony import */ var _models_covid_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./models/covid.js */ "./src/models/covid.js");
 /* harmony import */ var _controllers_map_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./controllers/map.js */ "./src/controllers/map.js");
-/* harmony import */ var _assets_icon_favicon_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./assets/icon/favicon.png */ "./src/assets/icon/favicon.png");
-/* harmony import */ var _assets_icon_github_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./assets/icon/github.png */ "./src/assets/icon/github.png");
-/* harmony import */ var _assets_icon_Octocat_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./assets/icon/Octocat.png */ "./src/assets/icon/Octocat.png");
-/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles/style.css */ "./src/styles/style.css");
-
-
+/* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/footer/footer.component */ "./src/components/footer/footer.component.js");
+/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles/style.css */ "./src/styles/style.css");
 
 
 
@@ -35801,6 +35809,8 @@ const getCpia = (country) => {
 };
 
 // getCpia();
+
+document.querySelector(".footer").innerHTML = _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__.footer;
 
 loadMapData();
 loadData();
