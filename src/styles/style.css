@@ -1,20 +1,19 @@
 * {
   vertical-align: baseline;
-	font-weight: inherit;
-	font-family: inherit;
-	font-style: inherit;
-	font-size: 100%;
-	border: 0 none;
-	outline: 0;
-	padding: 0;
-	margin: 0;
+  font-weight: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  border: 0 none;
+  outline: 0;
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 
   color: rgb(216, 216, 216);
 }
 
-*:focus
-{
+*:focus {
   outline: none;
 }
 ::-webkit-scrollbar {
@@ -25,15 +24,15 @@
 ::-webkit-scrollbar-track {
   background: #4c4c4c;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 html {
@@ -42,7 +41,6 @@ html {
   /* width: 100vw; */
   margin: 0;
   padding: 0;
-
 }
 
 body {
@@ -58,90 +56,61 @@ body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1.1fr 3fr repeat(2, .95fr);
+  grid-template-columns: 1.1fr 3fr repeat(2, 0.95fr);
   grid-template-rows: 0.3fr 0.9fr 0.3fr 2fr 1fr 0.3fr 0.3fr;
   gap: 5px;
   /* width: 100vw; */
   margin: 0px auto 0px auto;
   height: 100vh;
-  transition: .5s;
+  transition: 0.5s;
   padding: 0;
   margin: 0;
   grid-template-areas:
-    "header header header header"
-    "global_cases map recoveries deaths"
-    "global_cases map charts charts"
-    "countries map charts charts"
-    "countries map charts charts"
-    "updated map charts charts"
-    "updated footer charts charts";
-
+    'header header header header'
+    'global_cases map recoveries deaths'
+    'global_cases map charts charts'
+    'countries map charts charts'
+    'countries map charts charts'
+    'updated map charts charts'
+    'updated footer charts charts';
 }
 
 .header {
-display: flex;
-align-items: center;
-justify-content: center;
-grid-area: header;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: header;
 }
 
 .header__logo {
-grid-area: header__logo;
-display: flex;
-justify-content: flex-end;
-align-items: center;
-margin-top: 2px;
+  grid-area: header__logo;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 2px;
 }
 
 .header__title {
-grid-area: header__title;
-display: flex;
-justify-content: flex-start;
-align-items: center;
-color: #bdbdbd;
-margin-left: 5px;
-font-size: 130%;
+  grid-area: header__title;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #bdbdbd;
+  margin-left: 5px;
+  font-size: 130%;
 }
 
-.footer {
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-align-items: center;
-grid-area: footer;
-}
-.footer__git {
-grid-area: footer__git;
-display: flex;
-flex-wrap: nowrap;
-align-content: space-between;
-justify-content: start;
-align-items: center;
-padding-left: 5px;
-margin-top: 5px;
-}
-.footer__year {
-  display: flex;
-  justify-content: center;
-}
-.footer__rss {
-grid-area: footer__rss;
-display: flex;
-justify-content: center;
-align-items: center;
-}
 .map {
-display: block;
-z-index: 0;
-grid-template-columns: 1fr 2fr 1fr;
-grid-template-rows: 1.85fr 0.15fr;
-gap: 0px 0px;
-grid-template-areas:
-    "map__image map__image map__image"
-    "map__left map__input map__right";
-grid-area: map;
-overflow: hidden;
+  display: block;
+  z-index: 0;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1.85fr 0.15fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    'map__image map__image map__image'
+    'map__left map__input map__right';
+  grid-area: map;
+  overflow: hidden;
 }
 /*.map__image { grid-area: map__image; }*/
 /*.map__input { grid-area: map__input; }*/
@@ -157,31 +126,33 @@ overflow: hidden;
   grid-area: global_cases;
 }
 .updated {
-  font-size: .9rem;
+  font-size: 0.9rem;
   padding: 3px;
   display: flex;
   flex-direction: column;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   align-items: center;
   grid-area: updated;
   text-align: center;
   background-color: rgb(64, 64, 64);
-  }
+}
 
 .csv__wrapper {
-  font-size: .6rem;
+  font-size: 0.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .chart__note {
-  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   font-weight: bold;
   padding: 4px 8px;
 
   background-color: wheat;
   color: #292929;
-  
+
   margin: 15%;
   text-align: center;
   width: 120px;
@@ -191,7 +162,7 @@ overflow: hidden;
   font-size: 10px;
   grid-area: charts;
   padding: 25px;
-    
+
   display: flex;
   flex-grow: 2;
   flex-direction: column;
@@ -205,21 +176,24 @@ overflow: hidden;
   background-color: rgb(80, 80, 80);
   padding-right: 10px;
 }
-.sum-chart, .daily-chart {
+.sum-chart,
+.daily-chart {
   display: flex;
   flex-direction: column;
 }
-.charts-title{
+.charts-title {
   display: flex;
   font-size: 1rem;
   align-self: flex-start;
 }
-.daily-chart-title, .sum-chart-title {
+.daily-chart-title,
+.sum-chart-title {
   align-self: flex-end;
   margin-bottom: 0;
   font-size: 0.9rem;
 }
-.sum-chart, .daily-chart {
+.sum-chart,
+.daily-chart {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -236,7 +210,7 @@ tr.active {
   cursor: pointer;
   padding: 0 5px 0 5px;
 }
-.countries tr:hover{
+.countries tr:hover {
   background-color: #5c5b5b;
   color: white;
 }
@@ -246,8 +220,9 @@ svg {
 rect {
   fill: steelblue;
 }
-.y.axis line, .x.axis line {
-  fill : none;
+.y.axis line,
+.x.axis line {
+  fill: none;
   stroke: #cfcfcf;
 }
 .x.axis .tick:first-of-type text {
@@ -264,9 +239,9 @@ rect {
 }
 .axis path,
 .axis line {
-fill: none;
-stroke: #000;
-shape-rendering: crispEdges;
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
 #map {
   z-index: 1;
@@ -283,11 +258,11 @@ shape-rendering: crispEdges;
   color: wheat;
   border-radius: 10px;
   background: rgb(84, 84, 84);
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  padding:10px;
+  padding: 10px;
   height: 200px;
-  width:100px;
+  width: 100px;
   line-height: 18px;
 }
 
@@ -305,10 +280,18 @@ h1 {
   color: red;
 }
 
-.charts__diagram { grid-area: charts__diagram; }
-.charts__left { grid-area: charts__left; }
-.charts__right { grid-area: charts__right; }
-.charts__input { grid-area: charts__input; }
+.charts__diagram {
+  grid-area: charts__diagram;
+}
+.charts__left {
+  grid-area: charts__left;
+}
+.charts__right {
+  grid-area: charts__right;
+}
+.charts__input {
+  grid-area: charts__input;
+}
 .countries {
   /* overflow-x: scroll; */
   /* padding-left: 8px;
@@ -320,7 +303,7 @@ h1 {
   scroll-behavior: smooth;
 }
 .countries .quantity {
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: normal;
   color: red;
 }
@@ -329,7 +312,8 @@ h1 {
   justify-content: center;
   align-content: center;
 }
-hr, hr.line { 
+hr,
+hr.line {
   display: block;
   margin-bottom: 0.5em;
   width: 100%;
@@ -338,7 +322,7 @@ hr, hr.line {
   border-style: inset;
   border-color: #292929;
   border-width: 1px;
-} 
+}
 hr.light__line {
   border-color: #444444;
   margin: 0;
@@ -346,31 +330,47 @@ hr.light__line {
   width: 100%;
 }
 
-.countries__table { grid-area: countries__table; }
-.countries__input { grid-area: countries__input; }
-.countries__left { grid-area: countries__left; }
-.countries__right { grid-area: countries__right; }
+.countries__table {
+  grid-area: countries__table;
+}
+.countries__input {
+  grid-area: countries__input;
+}
+.countries__left {
+  grid-area: countries__left;
+}
+.countries__right {
+  grid-area: countries__right;
+}
 .deaths {
   overflow-y: scroll;
   grid-area: deaths;
 }
-.deaths__table { grid-area: deaths__table; }
-.deaths__left { grid-area: deaths__left; }
-.deaths__right { grid-area: deaths__right; }
-.deaths__input { grid-area: deaths__input; }
+.deaths__table {
+  grid-area: deaths__table;
+}
+.deaths__left {
+  grid-area: deaths__left;
+}
+.deaths__right {
+  grid-area: deaths__right;
+}
+.deaths__input {
+  grid-area: deaths__input;
+}
 .recoveries {
   overflow-x: hidden;
   overflow-y: scroll;
- 
+
   grid-area: recoveries;
 }
 .smaller {
-  font-size: .7em;
+  font-size: 0.7em;
 }
-.red{
+.red {
   color: red;
 }
-.black{
+.black {
   color: black;
   font-weight: bold;
 }
@@ -390,23 +390,23 @@ hr.light__line {
 .county-flag {
   margin-left: 5px;
 }
-.death__header, .recovered__header, .countries__header {
+.death__header,
+.recovered__header,
+.countries__header {
   text-align: center;
   font-size: 1.5rem;
 }
-.recov__table { grid-area: recov__table; }
-.recov__input { grid-area: recov__input; }
-.recov__left { grid-area: recov__left; }
-.recov__right { grid-area: recov__right; }
-
-.footer-icon a img {
-  height: 1.5em;
+.recov__table {
+  grid-area: recov__table;
 }
-
-.footer-icon:hover  {
-  transform: scale(1.01);
-  filter: invert(1);
-  transition: all .1s ease-in-out;
+.recov__input {
+  grid-area: recov__input;
+}
+.recov__left {
+  grid-area: recov__left;
+}
+.recov__right {
+  grid-area: recov__right;
 }
 
 .header__logo a img {
@@ -419,8 +419,15 @@ hr.light__line {
   transition: 3s;
 }
 
-.header, .footer, .map, .charts, .countries, .global_cases, .deaths, .recoveries, .updated {
-
+.header,
+.footer,
+.map,
+.charts,
+.countries,
+.global_cases,
+.deaths,
+.recoveries,
+.updated {
   background-color: rgb(64, 64, 64);
   border: #4c4c4c solid 0.1em;
   border-radius: 1px;
@@ -435,7 +442,7 @@ hr.light__line {
   position: relative;
 }
 
-.input input{
+.input input {
   margin: 3px;
   max-width: 130px;
   background-color: transparent;
@@ -443,25 +450,27 @@ hr.light__line {
   position: absolute;
 }
 
-.input input:hover, .input input:focus{
+.input input:hover,
+.input input:focus {
   background-color: #4c4c4c;
 }
 
 .btn-left {
-   display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0px 2px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px 2px;
 }
 
 .btn-right {
   display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0px 2px;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 2px;
 }
 
-.btn-left:hover, .btn-right:hover {
+.btn-left:hover,
+.btn-right:hover {
   transform: scale(1.05);
   transition: all 0.5s ease-in-out;
   filter: drop-shadow(2px 4px 6px #ffffff);
@@ -474,9 +483,7 @@ hr.light__line {
   /*display: table-column;*/
 }
 
-
 .icon-marker {
-
   display: flex;
   position: relative;
   justify-content: center;
@@ -484,7 +491,7 @@ hr.light__line {
   color: white;
   /* width: 4em;
   height: 4em; */
-  font-size: .7em;
+  font-size: 0.7em;
   font-weight: bold;
   /* opacity: .8; */
   border-radius: 100%;
@@ -492,7 +499,7 @@ hr.light__line {
 .leaflet-interactive {
   stroke-opacity: 0;
   fill: rgb(255, 0, 0);
-  
+
   fill-opacity: 0.3;
 }
 
@@ -509,33 +516,36 @@ hr.light__line {
   font-size: 1.4em;
   padding: 1em;
   background-color: #292929;
-  border-radius: .4em;
+  border-radius: 0.4em;
   margin-bottom: 1em;
 }
 
 .icon-marker-tooltip:before {
   display: block;
   position: absolute;
-  bottom: -.6em;
+  bottom: -0.6em;
   left: 50%;
   content: '';
   width: 1.4em;
   height: 1.4em;
   background-color: #292929;
   transform: rotate(45deg);
-  margin-left: -.7em;
+  margin-left: -0.7em;
 }
-.deaths__table, .recov__table{  
+.deaths__table,
+.recov__table {
   text-align: left;
 }
-.deaths, .recoveries {
+.deaths,
+.recoveries {
   padding: 10px;
 }
-.quantity__cases, .global_cases__number{
+.quantity__cases,
+.global_cases__number {
   font-weight: bold;
   color: darkred;
 }
-.global_cases__number{
+.global_cases__number {
   color: red;
 }
 
@@ -561,7 +571,7 @@ hr.light__line {
     text-align: center;
     order: 0;
   }
-  .charts{
+  .charts {
     /* margin: 0 20px; */
     padding: 5px 20px;
     order: 1;
@@ -585,13 +595,12 @@ hr.light__line {
     display: flex;
     height: 400px;
     order: 2;
-    
   }
   .global_cases {
     display: flex;
     order: 0;
   }
-  .global_cases > *{
+  .global_cases > * {
     align-self: center;
   }
   .recoveries {
@@ -600,10 +609,9 @@ hr.light__line {
   .deaths {
     order: 7;
   }
-  .footer {
-    order: 8;
-  }
-  .box,.popup{
+
+  .box,
+  .popup {
     display: none;
   }
 }
@@ -673,7 +681,7 @@ hr.light__line {
   max-height: 30%;
   overflow: auto;
 }
-.popup .content h3{
+.popup .content h3 {
   margin: 20px 0;
   text-align: center;
   font-weight: bold;

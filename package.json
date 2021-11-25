@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
+  "homepage": "https://llama-with-thumbs.github.io/covid-console/",
   "dependencies": {
     "d3": "^7.1.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "sass-loader": "^12.3.0"
   },
   "devDependencies": {
     "css-loader": "^6.5.1",
     "csv-loader": "^3.0.3",
+    "gh-pages": "^3.2.3",
+    "sass": "^1.43.5",
     "style-loader": "^3.3.1",
     "webpack": "^5.64.3",
     "webpack-cli": "^4.9.1"
@@ -20,7 +24,7 @@
     "start": "webpack-dev-server --open",
     "test": "npm run eslint",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -31,6 +35,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/llama-with-thumbs/covid-console/issues"
-  },
-  "homepage": "https://github.com/llama-with-thumbs/covid-console#readme"
+  }
 }

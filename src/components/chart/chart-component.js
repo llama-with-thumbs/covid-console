@@ -1,18 +1,16 @@
-import AbstractComponent from "../abstract-component.js";
-import { filterById } from "../../utils.js";
-import dailyChart from "./daily-chart/daily-chart.js";
-import sumChart from "./sum-chart/sum-chart.js";
-import { json } from "d3";
+import AbstractComponent from '../abstract-component.js';
+import { filterById } from '../../utils.js';
+import dailyChart from './daily-chart/daily-chart.js';
+import sumChart from './sum-chart/sum-chart.js';
+import { json } from 'd3';
 
 import defaultData from '../../assets/covid-data.csv';
-
-console.log(defaultData);
 
 const Chart = (countyName) => {
   const currDate = new Date();
   const newCountry = countyName.toLowerCase();
 
-  if (countyName === "total") {
+  if (countyName === 'total') {
     const defaultSumData = defaultData.map((d) => {
       const cases = +d[1];
       const date = new Date(d[0]);
@@ -23,23 +21,21 @@ const Chart = (countyName) => {
       const date = new Date(d[0]);
       return { cases, date };
     });
-      sumChart(countyName, defaultSumData);
-      dailyChart(countyName, defaultDailyData);
+    sumChart(countyName, defaultSumData);
+    dailyChart(countyName, defaultDailyData);
   } else {
     json(
-      `https://api.covid19api.com/dayone/country/${newCountry}/status/confirmed`
+      `https://api.covid19api.com/dayone/country/${newCountry}/status/confirmed`,
     ).then((data) => {
       sumChart(countyName, data);
       dailyChart(countyName, data);
     });
   }
-
-  
-  return " ";
+  return ' ';
 };
 
 export const getCountryName = (data, filter) => {
-  if (filter === "world") return "total";
+  if (filter === 'world') return 'total';
   const dataFiltered = filterById(data, filter);
   const countryData = dataFiltered.countries[0];
   const name = countryData.country;
@@ -48,8 +44,6 @@ export const getCountryName = (data, filter) => {
 
 export const makeChartsMarkup = (data, filter) => {
   const name = getCountryName(data, filter);
-
-  // console.log(data, filter);
   const markup = Chart(name);
   return markup;
 };

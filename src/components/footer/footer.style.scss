@@ -1,0 +1,45 @@
+.footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	grid-area: footer;
+}
+.footer__git {
+	grid-area: footer__git;
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: space-between;
+	justify-content: start;
+	align-items: center;
+	padding-left: 5px;
+	margin-top: 5px;
+}
+.footer__year {
+	display: flex;
+	justify-content: center;
+}
+.footer__rss {
+	grid-area: footer__rss;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.footer-icon {
+	a {
+		img {
+			height: 1.5em;
+		}
+	}
+	&:hover {
+		transform: scale(1.01);
+		filter: invert(1);
+		transition: all 0.1s ease-in-out;
+	}
+}
+
+@media screen and (max-width: 850px) {
+  .footer {
+    order: 8;
+  }
+}
