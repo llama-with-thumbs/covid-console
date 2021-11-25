@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../src/assets/icon/favicon.png" type="image/png">
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <title>Covid19 Dashboard</title>
+</head>
+
+<body class="body">
+  <div class="grid-container" id="main">
+    <section class="charts">
+      <div class="sum-chart"></div>
+      <div class="daily-chart"></div>
+    </section>
+    <section class="map">
+      <div id="map"></div>
+    </section>
+    <div class="header">
+      <div class="header__logo">
+        <a href="#">
+        </a>
+      </div>
+      <div class="header__title">
+        <div class="title">
+          <h1>COVID-19 Dashboard</h1>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer__git footer-icon">
+        <a href="https://github.com/llama-with-thumbs/covid/tree/covid-dashboard">
+          <img src="../src/assets/icon/Octocat.png" alt="github-llama-with-thumbs" title="app's repo">
+        </a>
+        <a href="https://github.com/llama-with-thumbs/covid/tree/covid-dashboard/README.md">
+          <img src="../src/assets/icon/GitHub_Logo.png" alt="github-llama-with-thumbs" title="app's repo">
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="bundle.js"></script>
+</html>
