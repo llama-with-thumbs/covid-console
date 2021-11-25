@@ -1870,6 +1870,39 @@ const renameObjKeys = (obj) => {
 
 /***/ }),
 
+/***/ "./src/assets/icon/Octocat.png":
+/*!*************************************!*\
+  !*** ./src/assets/icon/Octocat.png ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "363cb5edea582a89c41f.png";
+
+/***/ }),
+
+/***/ "./src/assets/icon/favicon.png":
+/*!*************************************!*\
+  !*** ./src/assets/icon/favicon.png ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "36a09a16b5440be24ccb.png";
+
+/***/ }),
+
+/***/ "./src/assets/icon/github.png":
+/*!************************************!*\
+  !*** ./src/assets/icon/github.png ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "a3b537146fe31e468854.png";
+
+/***/ }),
+
 /***/ "./node_modules/d3-array/src/array.js":
 /*!********************************************!*\
   !*** ./node_modules/d3-array/src/array.js ***!
@@ -35645,6 +35678,18 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -35661,6 +35706,26 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -35675,7 +35740,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_countries_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controllers/countries.js */ "./src/controllers/countries.js");
 /* harmony import */ var _models_covid_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./models/covid.js */ "./src/models/covid.js");
 /* harmony import */ var _controllers_map_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./controllers/map.js */ "./src/controllers/map.js");
-/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles/style.css */ "./src/styles/style.css");
+/* harmony import */ var _assets_icon_favicon_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./assets/icon/favicon.png */ "./src/assets/icon/favicon.png");
+/* harmony import */ var _assets_icon_github_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./assets/icon/github.png */ "./src/assets/icon/github.png");
+/* harmony import */ var _assets_icon_Octocat_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./assets/icon/Octocat.png */ "./src/assets/icon/Octocat.png");
+/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles/style.css */ "./src/styles/style.css");
+
+
+
 
 
 
