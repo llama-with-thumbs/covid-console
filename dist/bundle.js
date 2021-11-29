@@ -1318,10 +1318,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const footer = `<div class="footer__git footer-icon">
-<a href="https://github.com/llama-with-thumbs/covid/tree/covid-dashboard">
+<a href="https://github.com/llama-with-thumbs/covid-console#readme">
   <img src="${_assets_icon_Octocat_png__WEBPACK_IMPORTED_MODULE_0__}" alt="github-llama-with-thumbs" title="app's repo">
 </a>
-<a href="https://github.com/llama-with-thumbs/covid/tree/covid-dashboard/README.md">
+<a href="https://github.com/llama-with-thumbs/covid-console#readme">
   <img src="${_assets_icon_GitHub_Logo_png__WEBPACK_IMPORTED_MODULE_1__}" alt="github-llama-with-thumbs" title="app's repo">
 </a>
 </div>`;
@@ -1444,12 +1444,11 @@ const makeUpdatedMarkup = (date) => {
               <li><a href="https://covid19api.com/">https://covid19api.com/</a></li>
               <li><a href="https://corona.lmao.ninja/v2/countries">https://corona.lmao.ninja/v2/countries</a></li>
             </ul>
-            <h3>* There could be several reasons for a zero data number:</h3>
+            <h3>* There could be several reasons for a zero in the data:</h3>
             <ul>
               <li>the data is accurate</li>
-              <li>the data delayed and will be added later</li>
-              <li>the data is unfaithful. See CPIA transparency, accountability, 
-              and corruption in the public sector rating. World Bank Group, CPIA database (<a href="http://www.worldbank.org/ida">http://www.worldbank.org/ida</a>).
+              <li>the data is delayed and will be added later</li>
+              <li>the data is unfaithful. See CPIA transparency, accountability, and corruption in the public sector rating. World Bank Group, CPIA database (<a href="http://www.worldbank.org/ida">http://www.worldbank.org/ida</a>).
               </li>
             </ul>
           </div>

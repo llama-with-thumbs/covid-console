@@ -43,12 +43,11 @@ export const makeUpdatedMarkup = (date) => {
               <li><a href="https://covid19api.com/">https://covid19api.com/</a></li>
               <li><a href="https://corona.lmao.ninja/v2/countries">https://corona.lmao.ninja/v2/countries</a></li>
             </ul>
-            <h3>* There could be several reasons for a zero data number:</h3>
+            <h3>* There could be several reasons for a zero in the data:</h3>
             <ul>
               <li>the data is accurate</li>
-              <li>the data delayed and will be added later</li>
-              <li>the data is unfaithful. See CPIA transparency, accountability, 
-              and corruption in the public sector rating. World Bank Group, CPIA database (<a href="http://www.worldbank.org/ida">http://www.worldbank.org/ida</a>).
+              <li>the data is delayed and will be added later</li>
+              <li>the data is unfaithful. See CPIA transparency, accountability, and corruption in the public sector rating. World Bank Group, CPIA database (<a href="http://www.worldbank.org/ida">http://www.worldbank.org/ida</a>).
               </li>
             </ul>
           </div>
