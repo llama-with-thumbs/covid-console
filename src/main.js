@@ -4,6 +4,7 @@ import CountriesController from './controllers/countries.js';
 import CovidModel from './models/covid.js';
 import drawMap from './controllers/map.js';
 import {footer} from './components/footer/footer.component';
+
 import './styles/style.css';
 
 const END_POINT = `https://api.covid19api.com`;

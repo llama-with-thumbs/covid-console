@@ -35844,6 +35844,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const END_POINT = `https://api.covid19api.com`;
 const main = document.querySelector('#main');
 
