@@ -4,11 +4,49 @@ import dailyChart from './daily-chart/daily-chart.js';
 import sumChart from './sum-chart/sum-chart.js';
 import { json } from 'd3';
 
+import './chart.styles.scss';
+
 import defaultData from '../../assets/covid-data.csv';
 
 const Chart = (countyName) => {
   const currDate = new Date();
   const newCountry = countyName.toLowerCase();
+  const charts = document.querySelector('.charts');
+
+  const openFirstTab = () => {
+    console.log('first');
+    return;
+    const tabName = 'first-chart-tab';
+    const chartTabs = document.querySelector('chart-tabs');
+    for (let i = 0; i < chartTabs.length; i++) {
+      chartTabs[i].style.display = 'none';
+    }
+    document.getElementById(tabName).style.display = 'block';
+  };
+
+  const openSecondTab = () => {
+    console.log('second');
+    return;
+    const tabName = 'second-chart-tab';
+    const chartTabs = document.querySelector('chart-tabs');
+    for (let i = 0; i < chartTabs.length; i++) {
+      chartTabs[i].style.display = 'none';
+    }
+    document.getElementById(tabName).style.display = 'block';
+  };
+
+  charts.innerHTML = `
+  <div class="chart-bar">
+    <button>First chart tab</button>
+    <button>Second chart tab</button>
+  </div>
+  
+  <div class="chart-tabs">
+    <div class="chart-tab" id="first-chart-tab"></div>
+      <div class="sum-chart"></div>
+      <div class="daily-chart"></div>
+    <div class="chart-tab" id="second-chart-tab" style="display: none;"></div>
+  </div>`;
 
   if (countyName === 'total') {
     const defaultSumData = defaultData.map((d) => {

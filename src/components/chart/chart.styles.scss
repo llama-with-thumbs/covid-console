@@ -1,0 +1,36 @@
+$primary: #616161;
+$primary-light: #8e8e8e;
+$primary-p: white;
+$primary-light-p: black;
+
+.charts {
+  font-size: 10px;
+  grid-area: charts;
+  padding: 0;
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  .chart-bar {
+    background-color: $primary-light;
+    color: $primary-light-p;
+    width: 100%;
+    margin: 0;
+    padding: 3px;
+    button {
+      color: $primary-light-p;
+      padding: 3px;
+      margin: 0 4px;
+      min-width: 60px;
+      text-align: center;
+    }
+  }
+  .chart-tabs {
+    margin: 0 25px;
+    .sum-chart,
+    .daily-chart {
+      margin: 0;
+    }
+  }
+}
