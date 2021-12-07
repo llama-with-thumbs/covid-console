@@ -922,8 +922,8 @@ const Chart = (countyName) => {
 
   charts.innerHTML = `
   <div class="chart-bar">
-    <button onclick="function(){console.log('smth');}">First chart tab</button>
-    <button onclick="">Second chart tab</button>
+    <button>First chart tab</button>
+    <button>Second chart tab</button>
   </div>
   
   <div class="chart-tabs">
