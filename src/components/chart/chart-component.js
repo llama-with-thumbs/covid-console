@@ -42,9 +42,10 @@ const Chart = (countyName) => {
   </div>
   
   <div class="chart-tabs">
-    <div class="chart-tab" id="first-chart-tab"></div>
+    <div class="chart-tab" id="first-chart-tab">
       <div class="sum-chart"></div>
       <div class="daily-chart"></div>
+    </div>
     <div class="chart-tab" id="second-chart-tab" style="display: none;"></div>
   </div>`;
 

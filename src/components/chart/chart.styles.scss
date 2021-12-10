@@ -13,6 +13,7 @@ $primary-light-p: black;
   justify-content: flex-start;
   align-items: flex-start;
   .chart-bar {
+    display: none;
     background-color: $primary-light;
     color: $primary-light-p;
     width: 100%;

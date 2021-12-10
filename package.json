@@ -27,8 +27,7 @@
     "test": "npm run eslint",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "build": "webpack -p --progress",
-    "start": "webpack-dev-server"
+    "build": "webpack -p --progress"
   },
   "repository": {
     "type": "git",
