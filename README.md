@@ -6,7 +6,7 @@ Project-based course focusing on best practices (MVC pattern, Airbnb style, Conv
   
 - App-interface
   
-![COVID-19 Dashboard](covid-console/src/assets/screen-capture.png "COVID-19 Dashboard interface")
+![COVID-19 Dashboard](src/assets/app-interface.png "COVID-19 Dashboard interface")
 
 Technologies:
 - Model-View-Controller pattern
