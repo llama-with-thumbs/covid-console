@@ -1,6 +1,6 @@
 # COVID-19 Dashboard
 
-Project-based course focusing on best practices (MVC pattern, Airbnb style, Conventional Commits, BEM) and group work, with weekly projects culminating in a Covid dashboard 
+This single page app was made as part of The Rolling Scopes School Project-based course focusing on best practices (Airbnb style, Conventional Commits, BEM) and group work, with weekly projects culminating in a Covid dashboard.
 
 - Deployed at: https://llama-with-thumbs.github.io/covid-console/
   
@@ -18,8 +18,8 @@ Aggregated data sources:
 - Main:
   - COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University https://github.com/CSSEGISandData/COVID-19
 - Additional:
-  - https://api.covid19api.com/
-  - https://corona.lmao.ninja/v2/countries;
+  - https://covid19api.com/
+  - https://corona.lmao.ninja
 
 \* CPIA transparency, accountability, and corruption in the public sector rating (1=low to 6=high).
 
