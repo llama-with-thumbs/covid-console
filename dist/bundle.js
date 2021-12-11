@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".charts {\n  font-size: 10px;\n  grid-area: charts;\n  padding: 0;\n  display: flex;\n  flex-grow: 2;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: flex-start;\n}\n.charts .chart-bar {\n  background-color: #8e8e8e;\n  color: black;\n  width: 100%;\n  margin: 0;\n  padding: 3px;\n}\n.charts .chart-bar button {\n  color: black;\n  padding: 3px;\n  margin: 0 4px;\n  min-width: 60px;\n  text-align: center;\n}\n.charts .chart-tabs {\n  margin: 0 25px;\n}\n.charts .chart-tabs .sum-chart,\n.charts .chart-tabs .daily-chart {\n  margin: 0;\n}", "",{"version":3,"sources":["webpack://./src/components/chart/chart.styles.scss"],"names":[],"mappings":"AAKA;EACE,eAAA;EACA,iBAAA;EACA,UAAA;EACA,aAAA;EACA,YAAA;EACA,sBAAA;EACA,2BAAA;EACA,uBAAA;AAJF;AAKE;EACE,yBAdY;EAeZ,YAbc;EAcd,WAAA;EACA,SAAA;EACA,YAAA;AAHJ;AAII;EACE,YAlBY;EAmBZ,YAAA;EACA,aAAA;EACA,eAAA;EACA,kBAAA;AAFN;AAKE;EACE,cAAA;AAHJ;AAII;;EAEE,SAAA;AAFN","sourcesContent":["$primary: #616161;\r\n$primary-light: #8e8e8e;\r\n$primary-p: white;\r\n$primary-light-p: black;\r\n\r\n.charts {\r\n  font-size: 10px;\r\n  grid-area: charts;\r\n  padding: 0;\r\n  display: flex;\r\n  flex-grow: 2;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: flex-start;\r\n  .chart-bar {\r\n    background-color: $primary-light;\r\n    color: $primary-light-p;\r\n    width: 100%;\r\n    margin: 0;\r\n    padding: 3px;\r\n    button {\r\n      color: $primary-light-p;\r\n      padding: 3px;\r\n      margin: 0 4px;\r\n      min-width: 60px;\r\n      text-align: center;\r\n    }\r\n  }\r\n  .chart-tabs {\r\n    margin: 0 25px;\r\n    .sum-chart,\r\n    .daily-chart {\r\n      margin: 0;\r\n    }\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".charts {\n  font-size: 10px;\n  grid-area: charts;\n  padding: 25px;\n  display: flex;\n  flex-grow: 2;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: flex-start;\n}\n.charts .sum-chart,\n.charts .daily-chart {\n  display: flex;\n  flex-direction: column;\n}", "",{"version":3,"sources":["webpack://./src/components/chart/chart.styles.scss"],"names":[],"mappings":"AAKA;EACE,eAAA;EACA,iBAAA;EACA,aAAA;EAEA,aAAA;EACA,YAAA;EACA,sBAAA;EACA,2BAAA;EACA,uBAAA;AALF;AAMI;;EAEE,aAAA;EACA,sBAAA;AAJN","sourcesContent":["$primary: #616161;\r\n$primary-light: #8e8e8e;\r\n$primary-p: white;\r\n$primary-light-p: black;\r\n\r\n.charts {\r\n  font-size: 10px;\r\n  grid-area: charts;\r\n  padding: 25px;\r\n\r\n  display: flex;\r\n  flex-grow: 2;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: flex-start;\r\n    .sum-chart,\r\n    .daily-chart {\r\n      display: flex;\r\n      flex-direction: column;    }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -898,40 +898,8 @@ const Chart = (countyName) => {
   const newCountry = countyName.toLowerCase();
   const charts = document.querySelector('.charts');
 
-  const openFirstTab = () => {
-    console.log('first');
-    return;
-    const tabName = 'first-chart-tab';
-    const chartTabs = document.querySelector('chart-tabs');
-    for (let i = 0; i < chartTabs.length; i++) {
-      chartTabs[i].style.display = 'none';
-    }
-    document.getElementById(tabName).style.display = 'block';
-  };
-
-  const openSecondTab = () => {
-    console.log('second');
-    return;
-    const tabName = 'second-chart-tab';
-    const chartTabs = document.querySelector('chart-tabs');
-    for (let i = 0; i < chartTabs.length; i++) {
-      chartTabs[i].style.display = 'none';
-    }
-    document.getElementById(tabName).style.display = 'block';
-  };
-
-  charts.innerHTML = `
-  <div class="chart-bar">
-    <button>First chart tab</button>
-    <button>Second chart tab</button>
-  </div>
-  
-  <div class="chart-tabs">
-    <div class="chart-tab" id="first-chart-tab"></div>
-      <div class="sum-chart"></div>
-      <div class="daily-chart"></div>
-    <div class="chart-tab" id="second-chart-tab" style="display: none;"></div>
-  </div>`;
+  charts.innerHTML = `<div class="sum-chart"></div>
+      <div class="daily-chart"></div>`;
 
   if (countyName === 'total') {
     const defaultSumData = _assets_covid_data_csv__WEBPACK_IMPORTED_MODULE_6___default().map((d) => {

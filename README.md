@@ -2,7 +2,7 @@
 
 Project-based course focusing on best practices (MVC pattern, Airbnb style, Conventional Commits, BEM) and group work, with weekly projects culminating in a Covid dashboard 
 
-- Deployed at: https://llama-with-thumbs.github.io/covid/
+- Deployed at: https://llama-with-thumbs.github.io/covid-console/
   
 - App-interface
   
