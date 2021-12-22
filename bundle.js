@@ -1407,10 +1407,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const footer = `<div class="footer__git footer-icon">
-<a href="https://github.com/llama-with-thumbs/covid-console#readme">
+<a href="https://github.com/llama-with-thumbs/covid-console/tree/covid-console#readme">
   <img src="${_assets_icon_Octocat_png__WEBPACK_IMPORTED_MODULE_0__}" alt="github-llama-with-thumbs" title="app's repo">
 </a>
-<a href="https://github.com/llama-with-thumbs/covid-console#readme">
+<a href="https://github.com/llama-with-thumbs/covid-console/tree/covid-console#readme">
   <img src="${_assets_icon_GitHub_Logo_png__WEBPACK_IMPORTED_MODULE_1__}" alt="github-llama-with-thumbs" title="app's repo">
 </a>
 </div>`;
