@@ -5,9 +5,9 @@ const coordinatesMap = {};
 export const coordinates = (data) => {
   // console.log(data);
   data.forEach((country) => {
-    coordinatesMap[country.countryInfo.iso2] = [
-      country.countryInfo.lat,
-      country.countryInfo.long,
+    coordinatesMap[country.altSpellings[0]] = [
+      country.latlng[0],
+      country.latlng[1]
     ];
   });
   // console.log(coordinatesMap);
@@ -16,6 +16,7 @@ export const changeCoordinates = (filter) => {
   if (filter === "world") {
     mymap.setView([50, 10], 5);
   } else {
+    console.log(filter);
     mymap.setView(coordinatesMap[filter], 5);
   }
 };
@@ -24,7 +25,7 @@ export default function drawMap(data) {
   // mymap.setView([50, 10], 5);
 
   L.tileLayer(
-    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFkaW5la2hpcyIsImEiOiJja2loZGticTMwNzJxMnltbGRsdzRqZmw0In0.E8fOw826aYb03PGElEtyYQ",
+    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94dXNlcmZvcmZyZWUiLCJhIjoiY2xjcWJtaTNpMDRiYzNwazZ6bnJjM3dlZiJ9.okn2pkFIoQAPrMtXDmBxGQ",
     {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -153,6 +154,7 @@ export default function drawMap(data) {
     geoJsonLayerTwo.addTo(mymap);
     geoJsonLayerOne.addTo(mymap);
   }
-  getData(data);
+  // getData(data);
   mymap.setView([50, 10], 5);
+  coordinates(data);
 }
