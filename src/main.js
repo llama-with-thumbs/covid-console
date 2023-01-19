@@ -17,21 +17,25 @@ const loadData = () => {
       return response.text();
     })
     .then((text) => {
-      const api = JSON.parse(text);
-      // console.log(api);
-
-      renameObjKeys(api);
-      renameObjKeys(api.global);
-      api.countries.map((item) => renameObjKeys(item));
-      covidModel.setData(api);
+      const covidData = JSON.parse(text);
+      
+      // console.log(covidData);
+      
+      renameObjKeys(covidData);
+      renameObjKeys(covidData.global);
+      covidData.countries.map((item) => renameObjKeys(item));
+      covidModel.setData(covidData);
       const updated = new UpdatedController(main, covidModel);
       const countries = new CountriesController(main, covidModel);
       updated.render();
       countries.render();
+
+      loadMapData(covidData);
+
     });
 };
 
-const loadMapData = () => {
+const loadMapData = (covidData) => {
   
 
 
@@ -44,11 +48,11 @@ const loadMapData = () => {
   };
   
   fetch('https://rest-country-api.p.rapidapi.com/', options)
-    .then(response => response.json())
-    .then(response => {
-      drawMap(response);
-      // console.log(response);
-      // response.forEach( country => {
+    .then(countryData => countryData.json())
+    .then(countryData => {
+      drawMap(countryData, covidData);
+      // console.log(countryData);
+      // countryData.forEach( country => {
       //         console.log(country);
       //       });
     })
@@ -79,5 +83,4 @@ const loadMapData = () => {
 
 document.querySelector(".footer").innerHTML = footer;
 
-loadMapData();
 loadData();

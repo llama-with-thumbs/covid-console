@@ -1,10 +1,12 @@
+import { count } from "d3";
+
 export let mymap = L.map("map");
 
 const coordinatesMap = {};
 
-export const coordinates = (data) => {
-  // console.log(data);
-  data.forEach((country) => {
+export const coordinates = (countryData) => {
+  // console.log(countryData);
+  countryData.forEach((country) => {
     coordinatesMap[country.altSpellings[0]] = [
       country.latlng[0],
       country.latlng[1]
@@ -12,16 +14,17 @@ export const coordinates = (data) => {
   });
   // console.log(coordinatesMap);
 };
+
 export const changeCoordinates = (filter) => {
   if (filter === "world") {
     mymap.setView([50, 10], 5);
   } else {
-    console.log(filter);
+    // console.log(filter);
     mymap.setView(coordinatesMap[filter], 5);
   }
 };
 
-export default function drawMap(data) {
+export default function drawMap(countryData, covidData) {
   // mymap.setView([50, 10], 5);
 
   L.tileLayer(
@@ -37,17 +40,28 @@ export default function drawMap(data) {
     }
   ).addTo(mymap);
 
-  function getData(data) {
-    coordinates(data);
+  function getData(countryData) {
+    coordinates(countryData);
+    let lat;
+    let lng;
 
-    const hasData = Array.isArray(data) && data.length > 0;
+    const hasData = Array.isArray(countryData) && countryData.length > 0;
     if (!hasData) return;
     const geoJson = {
       type: "FeatureCollection",
-      features: data.map((country = {}) => {
+      features: countryData.map((country) => {
+        // console.log(country.latlng[0],
+        //   country.latlng[1]);
+        
+        
         // const countryFlag = country.countryInfo.flag;
-        const { countryInfo = {} } = country;
-        const { lat, long: lng } = countryInfo;
+        // const { countryInfo = {} } = country;
+        // const { lat, long: lng } = countryInfo;
+
+        // lat = country.latlng[0];
+        // lng = country.latlng[1];
+
+        // console.log(country);
 
         return {
           type: "Feature",
@@ -56,7 +70,7 @@ export default function drawMap(data) {
           },
           geometry: {
             type: "Point",
-            coordinates: [lng, lat],
+            coordinates: [country.latlng[1], country.latlng[0]],
           },
         };
       }),
@@ -64,15 +78,15 @@ export default function drawMap(data) {
 
     const geoJsonSecondLayer = {
       type: "FeatureCollection",
-      features: data.map((country = {}) => {
-        const { countryInfo = {} } = country;
-        const { lat, long: lng } = countryInfo;
+      features: countryData.map((country = {}) => {
 
-        var km = Math.log2(country.cases) * 2 + country.cases / 20000;
+        // var km = Math.log2(country.cases) * 2 + country.cases / 20000;
+        let km = 100;
+
         var points = 64;
         var coords = {
-          latitude: lat,
-          longitude: lng,
+          latitude: country.latlng[0],
+          longitude: country.latlng[1],
         };
         var ret = [];
         var distanceX =
@@ -100,7 +114,8 @@ export default function drawMap(data) {
         };
       }),
     };
-
+     
+    
     const geoJsonLayerOne = new L.GeoJSON(geoJson, {
       pointToLayer: (feature = {}, latlng) => {
         const { properties = {} } = feature;
@@ -154,7 +169,8 @@ export default function drawMap(data) {
     geoJsonLayerTwo.addTo(mymap);
     geoJsonLayerOne.addTo(mymap);
   }
-  // getData(data);
+  getData(countryData);
   mymap.setView([50, 10], 5);
-  coordinates(data);
+
+  // coordinates(countryData);//substitude for getData(countryData)
 }
