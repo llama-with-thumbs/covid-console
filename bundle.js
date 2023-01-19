@@ -35990,7 +35990,7 @@ const loadData = () => {
     .then((text) => {
       const covidData = JSON.parse(text);
       
-      // console.log(covidData);
+      console.log(covidData.Global);
       
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(covidData);
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(covidData.global);
