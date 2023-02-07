@@ -2,9 +2,9 @@
 export let mymap = L.map("map");
 
 const coordinatesMap = {};
-
 export const coordinates = (countryData) => {
-  countryData.forEach((country) => {
+  console.log("coordinates: ", countryData);
+  return countryData.forEach((country) => {
     coordinatesMap[country.altSpellings[0]] = [
       country.latlng[0],
       country.latlng[1]
@@ -17,8 +17,8 @@ export const changeCoordinates = (filter) => {
     // console.log("world");
     mymap.setView([50, 10], 5);
   } else {
-    console.log(filter);
-    console.log("coordinatesMap[filter]", coordinatesMap[filter]);
+    // console.log(filter);
+    // console.log("coordinatesMap[filter]", coordinatesMap[filter]);
     mymap.setView(coordinatesMap[filter], 5);
   }
 };
@@ -205,6 +205,5 @@ export default function drawMap(countryData, covidData, covidOneNineThree) {
   }
   getData(data);
   mymap.setView([50, 10], 5);
-
-  // coordinates(countryData);//substitude for getData(countryData)
+  coordinates(countryData);
 }
