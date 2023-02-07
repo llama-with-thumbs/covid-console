@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".footer {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n  grid-area: footer;\n}\n\n.footer__git {\n  grid-area: footer__git;\n  display: flex;\n  flex-wrap: nowrap;\n  align-content: space-between;\n  justify-content: start;\n  align-items: center;\n  padding-left: 5px;\n  margin-top: 5px;\n}\n\n.footer__year {\n  display: flex;\n  justify-content: center;\n}\n\n.footer__rss {\n  grid-area: footer__rss;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.footer-icon a img {\n  height: 1.5em;\n}\n.footer-icon:hover {\n  transform: scale(1.01);\n  filter: invert(1);\n  transition: all 0.1s ease-in-out;\n}\n\n@media screen and (max-width: 850px) {\n  .footer {\n    order: 8;\n  }\n}", "",{"version":3,"sources":["webpack://./src/components/footer/footer.style.scss"],"names":[],"mappings":"AAAA;EACC,aAAA;EACA,mBAAA;EACA,6BAAA;EACA,mBAAA;EACA,iBAAA;AACD;;AACA;EACC,sBAAA;EACA,aAAA;EACA,iBAAA;EACA,4BAAA;EACA,sBAAA;EACA,mBAAA;EACA,iBAAA;EACA,eAAA;AAED;;AAAA;EACC,aAAA;EACA,uBAAA;AAGD;;AADA;EACC,sBAAA;EACA,aAAA;EACA,uBAAA;EACA,mBAAA;AAID;;AAAE;EACC,aAAA;AAGH;AAAC;EACC,sBAAA;EACA,iBAAA;EACA,gCAAA;AAEF;;AAEA;EACE;IACE,QAAA;EACF;AACF","sourcesContent":[".footer {\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n\tjustify-content: space-around;\r\n\talign-items: center;\r\n\tgrid-area: footer;\r\n}\r\n.footer__git {\r\n\tgrid-area: footer__git;\r\n\tdisplay: flex;\r\n\tflex-wrap: nowrap;\r\n\talign-content: space-between;\r\n\tjustify-content: start;\r\n\talign-items: center;\r\n\tpadding-left: 5px;\r\n\tmargin-top: 5px;\r\n}\r\n.footer__year {\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n}\r\n.footer__rss {\r\n\tgrid-area: footer__rss;\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n\talign-items: center;\r\n}\r\n.footer-icon {\r\n\ta {\r\n\t\timg {\r\n\t\t\theight: 1.5em;\r\n\t\t}\r\n\t}\r\n\t&:hover {\r\n\t\ttransform: scale(1.01);\r\n\t\tfilter: invert(1);\r\n\t\ttransition: all 0.1s ease-in-out;\r\n\t}\r\n}\r\n\r\n@media screen and (max-width: 850px) {\r\n  .footer {\r\n    order: 8;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".footer {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n  grid-area: footer;\n}\n\n.footer__git {\n  grid-area: footer__git;\n  display: flex;\n  flex-wrap: nowrap;\n  align-content: space-between;\n  justify-content: start;\n  align-items: center;\n  padding-left: 5px;\n  margin-top: 5px;\n}\n\n.footer__year {\n  display: flex;\n  justify-content: center;\n}\n\n.footer__rss {\n  grid-area: footer__rss;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.footer-icon a img {\n  height: 1.5em;\n}\n.footer-icon:hover {\n  filter: brightness(0.8);\n  transition: all 0.1s ease-in-out;\n}\n\n@media screen and (max-width: 850px) {\n  .footer {\n    order: 8;\n  }\n}", "",{"version":3,"sources":["webpack://./src/components/footer/footer.style.scss"],"names":[],"mappings":"AAAA;EACC,aAAA;EACA,mBAAA;EACA,6BAAA;EACA,mBAAA;EACA,iBAAA;AACD;;AACA;EACC,sBAAA;EACA,aAAA;EACA,iBAAA;EACA,4BAAA;EACA,sBAAA;EACA,mBAAA;EACA,iBAAA;EACA,eAAA;AAED;;AAAA;EACC,aAAA;EACA,uBAAA;AAGD;;AADA;EACC,sBAAA;EACA,aAAA;EACA,uBAAA;EACA,mBAAA;AAID;;AAAE;EACC,aAAA;AAGH;AAAC;EACC,uBAAA;EACA,gCAAA;AAEF;;AAEA;EACE;IACE,QAAA;EACF;AACF","sourcesContent":[".footer {\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n\tjustify-content: space-around;\r\n\talign-items: center;\r\n\tgrid-area: footer;\r\n}\r\n.footer__git {\r\n\tgrid-area: footer__git;\r\n\tdisplay: flex;\r\n\tflex-wrap: nowrap;\r\n\talign-content: space-between;\r\n\tjustify-content: start;\r\n\talign-items: center;\r\n\tpadding-left: 5px;\r\n\tmargin-top: 5px;\r\n}\r\n.footer__year {\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n}\r\n.footer__rss {\r\n\tgrid-area: footer__rss;\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n\talign-items: center;\r\n}\r\n.footer-icon {\r\n\ta {\r\n\t\timg {\r\n\t\t\theight: 1.5em;\r\n\t\t}\r\n\t}\r\n\t&:hover {\r\n\t\tfilter: brightness(0.8);\r\n\t\ttransition: all 0.1s ease-in-out;\r\n\t}\r\n}\r\n\r\n@media screen and (max-width: 850px) {\r\n  .footer {\r\n    order: 8;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1730,13 +1730,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "changeCoordinates": () => (/* binding */ changeCoordinates),
 /* harmony export */   "default": () => (/* binding */ drawMap)
 /* harmony export */ });
+/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/src/index.js");
+
+
 let mymap = L.map("map");
 
 const coordinatesMap = {};
 
-const coordinates = (data) => {
-  // console.log(data);
-  data.forEach((country) => {
+const coordinates = (countryData) => {
+  // console.log(countryData);
+  countryData.forEach((country) => {
     coordinatesMap[country.altSpellings[0]] = [
       country.latlng[0],
       country.latlng[1]
@@ -1744,16 +1747,17 @@ const coordinates = (data) => {
   });
   // console.log(coordinatesMap);
 };
+
 const changeCoordinates = (filter) => {
   if (filter === "world") {
     mymap.setView([50, 10], 5);
   } else {
-    console.log(filter);
+    // console.log(filter);
     mymap.setView(coordinatesMap[filter], 5);
   }
 };
 
-function drawMap(data) {
+function drawMap(countryData, covidData) {
   // mymap.setView([50, 10], 5);
 
   L.tileLayer(
@@ -1769,17 +1773,28 @@ function drawMap(data) {
     }
   ).addTo(mymap);
 
-  function getData(data) {
-    coordinates(data);
+  function getData(countryData) {
+    coordinates(countryData);
+    let lat;
+    let lng;
 
-    const hasData = Array.isArray(data) && data.length > 0;
+    const hasData = Array.isArray(countryData) && countryData.length > 0;
     if (!hasData) return;
     const geoJson = {
       type: "FeatureCollection",
-      features: data.map((country = {}) => {
+      features: countryData.map((country) => {
+        // console.log(country.latlng[0],
+        //   country.latlng[1]);
+        
+        
         // const countryFlag = country.countryInfo.flag;
-        const { countryInfo = {} } = country;
-        const { lat, long: lng } = countryInfo;
+        // const { countryInfo = {} } = country;
+        // const { lat, long: lng } = countryInfo;
+
+        // lat = country.latlng[0];
+        // lng = country.latlng[1];
+
+        // console.log(country);
 
         return {
           type: "Feature",
@@ -1788,7 +1803,7 @@ function drawMap(data) {
           },
           geometry: {
             type: "Point",
-            coordinates: [lng, lat],
+            coordinates: [country.latlng[1], country.latlng[0]],
           },
         };
       }),
@@ -1796,15 +1811,15 @@ function drawMap(data) {
 
     const geoJsonSecondLayer = {
       type: "FeatureCollection",
-      features: data.map((country = {}) => {
-        const { countryInfo = {} } = country;
-        const { lat, long: lng } = countryInfo;
+      features: countryData.map((country = {}) => {
 
-        var km = Math.log2(country.cases) * 2 + country.cases / 20000;
+        // var km = Math.log2(country.cases) * 2 + country.cases / 20000;
+        let km = 100;
+
         var points = 64;
         var coords = {
-          latitude: lat,
-          longitude: lng,
+          latitude: country.latlng[0],
+          longitude: country.latlng[1],
         };
         var ret = [];
         var distanceX =
@@ -1832,7 +1847,8 @@ function drawMap(data) {
         };
       }),
     };
-
+     
+    
     const geoJsonLayerOne = new L.GeoJSON(geoJson, {
       pointToLayer: (feature = {}, latlng) => {
         const { properties = {} } = feature;
@@ -1886,9 +1902,10 @@ function drawMap(data) {
     geoJsonLayerTwo.addTo(mymap);
     geoJsonLayerOne.addTo(mymap);
   }
-  // getData(data);
+  getData(countryData);
   mymap.setView([50, 10], 5);
-  coordinates(data);
+
+  // coordinates(countryData);//substitude for getData(countryData)
 }
 
 
@@ -35971,21 +35988,25 @@ const loadData = () => {
       return response.text();
     })
     .then((text) => {
-      const api = JSON.parse(text);
-      // console.log(api);
-
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(api);
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(api.global);
-      api.countries.map((item) => (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(item));
-      covidModel.setData(api);
+      const covidData = JSON.parse(text);
+      
+      console.log(covidData.Global);
+      
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(covidData);
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(covidData.global);
+      covidData.countries.map((item) => (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(item));
+      covidModel.setData(covidData);
       const updated = new _controllers_updated_js__WEBPACK_IMPORTED_MODULE_1__["default"](main, covidModel);
       const countries = new _controllers_countries_js__WEBPACK_IMPORTED_MODULE_2__["default"](main, covidModel);
       updated.render();
       countries.render();
+
+      loadMapData(covidData);
+
     });
 };
 
-const loadMapData = () => {
+const loadMapData = (covidData) => {
   
 
 
@@ -35998,11 +36019,11 @@ const loadMapData = () => {
   };
   
   fetch('https://rest-country-api.p.rapidapi.com/', options)
-    .then(response => response.json())
-    .then(response => {
-      (0,_controllers_map_js__WEBPACK_IMPORTED_MODULE_4__["default"])(response);
-      // console.log(response);
-      // response.forEach( country => {
+    .then(countryData => countryData.json())
+    .then(countryData => {
+      (0,_controllers_map_js__WEBPACK_IMPORTED_MODULE_4__["default"])(countryData, covidData);
+      // console.log(countryData);
+      // countryData.forEach( country => {
       //         console.log(country);
       //       });
     })
@@ -36033,7 +36054,6 @@ const loadMapData = () => {
 
 document.querySelector(".footer").innerHTML = _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__.footer;
 
-loadMapData();
 loadData();
 
 })();

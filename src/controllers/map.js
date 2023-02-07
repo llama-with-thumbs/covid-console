@@ -1,31 +1,64 @@
-import { count } from "d3";
 
 export let mymap = L.map("map");
 
 const coordinatesMap = {};
 
 export const coordinates = (countryData) => {
-  // console.log(countryData);
   countryData.forEach((country) => {
     coordinatesMap[country.altSpellings[0]] = [
       country.latlng[0],
       country.latlng[1]
     ];
   });
-  // console.log(coordinatesMap);
 };
 
 export const changeCoordinates = (filter) => {
   if (filter === "world") {
+    // console.log("world");
     mymap.setView([50, 10], 5);
   } else {
-    // console.log(filter);
+    console.log(filter);
+    console.log("coordinatesMap[filter]", coordinatesMap[filter]);
     mymap.setView(coordinatesMap[filter], 5);
   }
 };
 
-export default function drawMap(countryData, covidData) {
+export default function drawMap(countryData, covidData, covidOneNineThree) {
   // mymap.setView([50, 10], 5);
+  // console.log(covidOneNineThree);
+  // console.log(countryData);
+
+  const fullData = () => countryData.map(restCountryApiCountry => {
+    const covidOneNineThreeCountry = covidOneNineThree.response.find(({country}) => country === restCountryApiCountry.name.common);
+    
+    return {
+      ...restCountryApiCountry,
+      // ...country
+      "population": restCountryApiCountry.population,
+      "countryName": restCountryApiCountry.name.official,
+      "cca2": restCountryApiCountry.cca2,
+      "latlng": restCountryApiCountry.latlng,
+      "totalConfirmed": typeof covidOneNineThreeCountry === 'undefined' ? 0 : covidOneNineThreeCountry.cases.total,
+    };
+  })
+  // console.log(fullData());
+
+  const data = countryData.map(restCountryApiCountry => {
+    const countryCovidData = covidData.countries.find(({ countryCode }) => countryCode === restCountryApiCountry.cca2);
+    return {
+      ...restCountryApiCountry,
+      // ...country
+      // "countryName": restCountryApiCountry.name.common,
+      "cca2": restCountryApiCountry.cca2,
+      "latlng": restCountryApiCountry.latlng,
+      "totalConfirmed": typeof countryCovidData === 'undefined' ? 0 : countryCovidData.totalConfirmed
+    };
+
+  })
+
+  // console.log(data);
+
+  // console.log(covidData);
 
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94dXNlcmZvcmZyZWUiLCJhIjoiY2xjcWJtaTNpMDRiYzNwazZ6bnJjM3dlZiJ9.okn2pkFIoQAPrMtXDmBxGQ",
@@ -41,28 +74,15 @@ export default function drawMap(countryData, covidData) {
   ).addTo(mymap);
 
   function getData(countryData) {
-    coordinates(countryData);
-    let lat;
-    let lng;
+    // coordinates(countryData);
 
     const hasData = Array.isArray(countryData) && countryData.length > 0;
     if (!hasData) return;
+
     const geoJson = {
       type: "FeatureCollection",
       features: countryData.map((country) => {
-        // console.log(country.latlng[0],
-        //   country.latlng[1]);
-        
-        
-        // const countryFlag = country.countryInfo.flag;
-        // const { countryInfo = {} } = country;
-        // const { lat, long: lng } = countryInfo;
-
-        // lat = country.latlng[0];
-        // lng = country.latlng[1];
-
         // console.log(country);
-
         return {
           type: "Feature",
           properties: {
@@ -78,22 +98,25 @@ export default function drawMap(countryData, covidData) {
 
     const geoJsonSecondLayer = {
       type: "FeatureCollection",
-      features: countryData.map((country = {}) => {
+      features: data.map((country = {}) => {
 
-        // var km = Math.log2(country.cases) * 2 + country.cases / 20000;
-        let km = 100;
+        // console.log(Math.log2(country.totalConfirmed) * 2 + country.totalConfirmed / 20000);
 
-        var points = 64;
-        var coords = {
+        // console.log(country.population);
+        // let km = country.totalConfirmed === 0 ? 10 : Math.log2(country.totalConfirmed) * 2 + country.totalConfirmed / 200000;
+        let km = country.population === 0 ? 10 : Math.log2(country.population) * 2 + country.population / 500000;
+        let points = 64;
+        let coords = {
           latitude: country.latlng[0],
           longitude: country.latlng[1],
         };
-        var ret = [];
-        var distanceX =
+
+        let ret = [];
+        let distanceX =
           km / (111.32 * Math.cos((coords.latitude * Math.PI) / 180));
-        var distanceY = km / 110.574;
-        var theta, x, y;
-        for (var i = 0; i < points; i++) {
+        let distanceY = km / 110.574;
+        let theta, x, y;
+        for (let i = 0; i < points; i++) {
           theta = (i / points) * (2 * Math.PI);
           x = distanceX * Math.cos(theta);
           y = distanceY * Math.sin(theta);
@@ -114,43 +137,51 @@ export default function drawMap(countryData, covidData) {
         };
       }),
     };
-     
-    
+
     const geoJsonLayerOne = new L.GeoJSON(geoJson, {
       pointToLayer: (feature = {}, latlng) => {
         const { properties = {} } = feature;
-        let updatedFormatted;
-        let casesString;
 
-        const { country, updated, cases, deaths, recovered } = properties;
+        // console.log(feature);
+        // let updatedFormatted;
+        // let casesString;
 
-        const logCases = Math.log2(cases) * 2 + cases / 100000;
+        const countryName = properties.name.common;
+        const population = properties.population;
+        const totalConfirmed = properties.totalConfirmed;
+        const { flags } = properties;
 
-        casesString = `${cases}`;
+        const logCases = Math.log2(totalConfirmed) * 2 + totalConfirmed / 1000000;
 
-        if (cases > 1000) {
-          casesString = `${casesString.slice(0, -3)}k+`;
-        }
+        // casesString = `${cases}`;
 
-        if (updated) {
-          updatedFormatted = new Date(updated).toLocaleString();
-        }
-        
+        // if (cases > 1000) {
+        //   casesString = `${casesString.slice(0, -3)}k+`;
+        // }
+
+        // if (updated) {
+        //   updatedFormatted = new Date(updated).toLocaleString();
+        // }
+
+
+        const deaths = 0;
+
         const html = `
-          <span class="icon-marker" data-country-name="${country}" style="
+          <span class="icon-marker" data-country-name="${countryName}" style="
           width: ${logCases}px;
           height: ${logCases}px;
           transform: translate(-50%, -50%);
           background: radial-gradient(rgb(70, 130, 180, 1),rgb(70, 130, 180,1), rgba(255,0,0,0), rgba(255,0,0,0));
           ">
             <span class="icon-marker-tooltip">
-              <h2>${country}</h2>
+              <h2>${countryName}<img class="county-flag" src="${flags[1]}" height="10" width="15" alt="flag"></h2>
               <ul>
-                <li><strong>Confirmed cases:</strong> ${cases.toLocaleString()}</li>
+                <li><strong>Population:</strong> ${population.toLocaleString()}</li>
+                <li><strong>Total number of cases:</strong> ${totalConfirmed.toLocaleString()}</li>
                 <li><strong>Deaths:</strong> ${deaths.toLocaleString()}</li>
               </ul>
             </span>
-            ${casesString}
+            <h2>${countryName}<img class="county-flag" src="${flags[1]}" height="10" width="15" alt="flag"></h2>
           </span>
         `;
 
@@ -166,10 +197,13 @@ export default function drawMap(countryData, covidData) {
 
     const geoJsonLayerTwo = new L.GeoJSON(geoJsonSecondLayer);
 
-    geoJsonLayerTwo.addTo(mymap);
     geoJsonLayerOne.addTo(mymap);
+
+    geoJsonLayerTwo.addTo(mymap);
+
+
   }
-  getData(countryData);
+  getData(data);
   mymap.setView([50, 10], 5);
 
   // coordinates(countryData);//substitude for getData(countryData)
