@@ -12,13 +12,18 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
   <link rel="shortcut icon" href="favicon.ico">
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-  <title>Covid19 console</title>
+  <title>Covid dashboard</title>
 </head>
 
 <body class="body">
   <div class="grid-container" id="main">
-    <section class="charts">
-    </section>
+    <section class="charts"></section>
+    <section class="global_cases"></section>
+    <section class="countries"></section>
+    <section class="updated"></section>
+    <section class="recoveries"></section>
+    <section class="deaths"></section>
+
     <section class="map">
       <div id="map"></div>
     </section>
@@ -29,7 +34,7 @@
       </div>
       <div class="header__title">
         <div class="title">
-          <h1>COVID-19 console</h1>
+          <h1>Coronavirus dashboard</h1>
         </div>
       </div>
     </div>
