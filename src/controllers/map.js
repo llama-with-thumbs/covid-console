@@ -3,7 +3,6 @@ export let mymap = L.map("map");
 
 const coordinatesMap = {};
 export const coordinates = (countryData) => {
-  console.log("coordinates: ", countryData);
   return countryData.forEach((country) => {
     coordinatesMap[country.altSpellings[0]] = [
       country.latlng[0],

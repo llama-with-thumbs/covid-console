@@ -57,7 +57,7 @@ export default function sumChart(country, data) {
     const xAxis = axisBottom(xScale)
       .tickSize(-innerHeight)
       .tickFormat(timeFormat("%b"))
-      .tickValues(xScale.domain().filter((d, i) => !(i % 50)));
+      .tickValues(xScale.domain().filter((d, i) => !(i % 80)));
 
     const yAxis = axisLeft(yScale)
       .tickFormat(yAxisTickFormat)

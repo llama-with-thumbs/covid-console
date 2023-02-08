@@ -1730,35 +1730,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "changeCoordinates": () => (/* binding */ changeCoordinates),
 /* harmony export */   "default": () => (/* binding */ drawMap)
 /* harmony export */ });
-/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/src/index.js");
-
 
 let mymap = L.map("map");
 
 const coordinatesMap = {};
-
 const coordinates = (countryData) => {
-  // console.log(countryData);
-  countryData.forEach((country) => {
+  console.log("coordinates: ", countryData);
+  return countryData.forEach((country) => {
     coordinatesMap[country.altSpellings[0]] = [
       country.latlng[0],
       country.latlng[1]
     ];
   });
-  // console.log(coordinatesMap);
 };
 
 const changeCoordinates = (filter) => {
   if (filter === "world") {
+    // console.log("world");
     mymap.setView([50, 10], 5);
   } else {
     // console.log(filter);
+    // console.log("coordinatesMap[filter]", coordinatesMap[filter]);
     mymap.setView(coordinatesMap[filter], 5);
   }
 };
 
-function drawMap(countryData, covidData) {
+function drawMap(countryData, covidData, covidOneNineThree) {
   // mymap.setView([50, 10], 5);
+  // console.log(covidOneNineThree);
+  // console.log(countryData);
+
+  const fullData = () => countryData.map(restCountryApiCountry => {
+    const covidOneNineThreeCountry = covidOneNineThree.response.find(({country}) => country === restCountryApiCountry.name.common);
+    
+    return {
+      ...restCountryApiCountry,
+      // ...country
+      "population": restCountryApiCountry.population,
+      "countryName": restCountryApiCountry.name.official,
+      "cca2": restCountryApiCountry.cca2,
+      "latlng": restCountryApiCountry.latlng,
+      "totalConfirmed": typeof covidOneNineThreeCountry === 'undefined' ? 0 : covidOneNineThreeCountry.cases.total,
+    };
+  })
+  // console.log(fullData());
+
+  const data = countryData.map(restCountryApiCountry => {
+    const countryCovidData = covidData.countries.find(({ countryCode }) => countryCode === restCountryApiCountry.cca2);
+    return {
+      ...restCountryApiCountry,
+      // ...country
+      // "countryName": restCountryApiCountry.name.common,
+      "cca2": restCountryApiCountry.cca2,
+      "latlng": restCountryApiCountry.latlng,
+      "totalConfirmed": typeof countryCovidData === 'undefined' ? 0 : countryCovidData.totalConfirmed
+    };
+
+  })
+
+  // console.log(data);
+
+  // console.log(covidData);
 
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94dXNlcmZvcmZyZWUiLCJhIjoiY2xjcWJtaTNpMDRiYzNwazZ6bnJjM3dlZiJ9.okn2pkFIoQAPrMtXDmBxGQ",
@@ -1774,28 +1806,15 @@ function drawMap(countryData, covidData) {
   ).addTo(mymap);
 
   function getData(countryData) {
-    coordinates(countryData);
-    let lat;
-    let lng;
+    // coordinates(countryData);
 
     const hasData = Array.isArray(countryData) && countryData.length > 0;
     if (!hasData) return;
+
     const geoJson = {
       type: "FeatureCollection",
       features: countryData.map((country) => {
-        // console.log(country.latlng[0],
-        //   country.latlng[1]);
-        
-        
-        // const countryFlag = country.countryInfo.flag;
-        // const { countryInfo = {} } = country;
-        // const { lat, long: lng } = countryInfo;
-
-        // lat = country.latlng[0];
-        // lng = country.latlng[1];
-
         // console.log(country);
-
         return {
           type: "Feature",
           properties: {
@@ -1811,22 +1830,25 @@ function drawMap(countryData, covidData) {
 
     const geoJsonSecondLayer = {
       type: "FeatureCollection",
-      features: countryData.map((country = {}) => {
+      features: data.map((country = {}) => {
 
-        // var km = Math.log2(country.cases) * 2 + country.cases / 20000;
-        let km = 100;
+        // console.log(Math.log2(country.totalConfirmed) * 2 + country.totalConfirmed / 20000);
 
-        var points = 64;
-        var coords = {
+        // console.log(country.population);
+        // let km = country.totalConfirmed === 0 ? 10 : Math.log2(country.totalConfirmed) * 2 + country.totalConfirmed / 200000;
+        let km = country.population === 0 ? 10 : Math.log2(country.population) * 2 + country.population / 500000;
+        let points = 64;
+        let coords = {
           latitude: country.latlng[0],
           longitude: country.latlng[1],
         };
-        var ret = [];
-        var distanceX =
+
+        let ret = [];
+        let distanceX =
           km / (111.32 * Math.cos((coords.latitude * Math.PI) / 180));
-        var distanceY = km / 110.574;
-        var theta, x, y;
-        for (var i = 0; i < points; i++) {
+        let distanceY = km / 110.574;
+        let theta, x, y;
+        for (let i = 0; i < points; i++) {
           theta = (i / points) * (2 * Math.PI);
           x = distanceX * Math.cos(theta);
           y = distanceY * Math.sin(theta);
@@ -1847,43 +1869,51 @@ function drawMap(countryData, covidData) {
         };
       }),
     };
-     
-    
+
     const geoJsonLayerOne = new L.GeoJSON(geoJson, {
       pointToLayer: (feature = {}, latlng) => {
         const { properties = {} } = feature;
-        let updatedFormatted;
-        let casesString;
 
-        const { country, updated, cases, deaths, recovered } = properties;
+        // console.log(feature);
+        // let updatedFormatted;
+        // let casesString;
 
-        const logCases = Math.log2(cases) * 2 + cases / 100000;
+        const countryName = properties.name.common;
+        const population = properties.population;
+        const totalConfirmed = properties.totalConfirmed;
+        const { flags } = properties;
 
-        casesString = `${cases}`;
+        const logCases = Math.log2(totalConfirmed) * 2 + totalConfirmed / 1000000;
 
-        if (cases > 1000) {
-          casesString = `${casesString.slice(0, -3)}k+`;
-        }
+        // casesString = `${cases}`;
 
-        if (updated) {
-          updatedFormatted = new Date(updated).toLocaleString();
-        }
-        
+        // if (cases > 1000) {
+        //   casesString = `${casesString.slice(0, -3)}k+`;
+        // }
+
+        // if (updated) {
+        //   updatedFormatted = new Date(updated).toLocaleString();
+        // }
+
+
+        const deaths = 0;
+
         const html = `
-          <span class="icon-marker" data-country-name="${country}" style="
+          <span class="icon-marker" data-country-name="${countryName}" style="
           width: ${logCases}px;
           height: ${logCases}px;
           transform: translate(-50%, -50%);
           background: radial-gradient(rgb(70, 130, 180, 1),rgb(70, 130, 180,1), rgba(255,0,0,0), rgba(255,0,0,0));
           ">
             <span class="icon-marker-tooltip">
-              <h2>${country}</h2>
+              <h2>${countryName}<img class="county-flag" src="${flags[1]}" height="10" width="15" alt="flag"></h2>
               <ul>
-                <li><strong>Confirmed cases:</strong> ${cases.toLocaleString()}</li>
+                <li><strong>Population:</strong> ${population.toLocaleString()}</li>
+                <li><strong>Total number of cases:</strong> ${totalConfirmed.toLocaleString()}</li>
                 <li><strong>Deaths:</strong> ${deaths.toLocaleString()}</li>
               </ul>
             </span>
-            ${casesString}
+            <h2>${countryName}<img class="county-flag" src="${flags[1]}" height="10" width="15" alt="flag"></h2>
           </span>
         `;
 
@@ -1899,13 +1929,15 @@ function drawMap(countryData, covidData) {
 
     const geoJsonLayerTwo = new L.GeoJSON(geoJsonSecondLayer);
 
-    geoJsonLayerTwo.addTo(mymap);
     geoJsonLayerOne.addTo(mymap);
-  }
-  getData(countryData);
-  mymap.setView([50, 10], 5);
 
-  // coordinates(countryData);//substitude for getData(countryData)
+    geoJsonLayerTwo.addTo(mymap);
+
+
+  }
+  getData(data);
+  mymap.setView([50, 10], 5);
+  coordinates(countryData);
 }
 
 
@@ -35982,16 +36014,29 @@ const END_POINT = `https://api.covid19api.com`;
 const main = document.querySelector('#main');
 
 const covidModel = new _models_covid_js__WEBPACK_IMPORTED_MODULE_3__["default"]();
-const loadData = () => {
+
+const loadCovidData = () => {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '6add2943cbmsh1fd6db18b662239p1893f1jsn42443cb6bdda',
+      'X-RapidAPI-Host': 'covid-193.p.rapidapi.com'
+    }
+  };
+
+  fetch('https://covid-193.p.rapidapi.com/statistics', options)
+    .then(response => response.json())
+    .then(response => loadData(response))
+    .catch(err => console.error("Oh... new covid data fuck", err));
+}
+  
+const loadData = (covidOneNineThree) => {
   fetch(`${END_POINT}/summary`)
     .then((response) => {
       return response.text();
     })
     .then((text) => {
       const covidData = JSON.parse(text);
-      
-      console.log(covidData.Global);
-      
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(covidData);
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(covidData.global);
       covidData.countries.map((item) => (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.renameObjKeys)(item));
@@ -36001,60 +36046,35 @@ const loadData = () => {
       updated.render();
       countries.render();
 
-      loadMapData(covidData);
-
-    });
+      loadMap(covidData, covidOneNineThree);
+    })
+    .catch(err => console.error("fuck, covid data...", err));
 };
 
-const loadMapData = (covidData) => {
-  
 
 
-  const options = {
+
+const loadMap = (covidData, covidOneNineThree) => {
+
+  const countriesData = {
     method: 'GET',
     headers: {
       'X-RapidAPI-Key': '6add2943cbmsh1fd6db18b662239p1893f1jsn42443cb6bdda',
       'X-RapidAPI-Host': 'rest-country-api.p.rapidapi.com'
     }
   };
-  
-  fetch('https://rest-country-api.p.rapidapi.com/', options)
-    .then(countryData => countryData.json())
-    .then(countryData => {
-      (0,_controllers_map_js__WEBPACK_IMPORTED_MODULE_4__["default"])(countryData, covidData);
-      // console.log(countryData);
-      // countryData.forEach( country => {
-      //         console.log(country);
-      //       });
+
+  fetch('https://rest-country-api.p.rapidapi.com/', countriesData)
+    .then(response => response.json())
+    .then(restCountryApi => {
+      (0,_controllers_map_js__WEBPACK_IMPORTED_MODULE_4__["default"])(restCountryApi, covidData, covidOneNineThree);
     })
-    .catch(err => console.error(err));
-
-  // fetch(`https://ajayakv-rest-countries-v1.p.rapidapi.com/rest/v1/all`)
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     // drawMap(data);
-  //     console.log(data)
-  //     data.forEach( country => {
-  //       console.log(country);
-  //     });
-  //   });
+    .catch(err => console.error("country data fuck...", err));
 };
-
-// const cpiaData = () =>
-//   fetch('../public/assets/CPIA.json').then((res) => res.json());
-
-// const getCpia = (country) => {
-//   // console.log(cpiaData());
-//   // cpiaData.forEach((country) => {
-//   //   console.log(country);
-//   // });
-// };
-
-// getCpia();
 
 document.querySelector(".footer").innerHTML = _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__.footer;
 
-loadData();
+loadCovidData();
 
 })();
 

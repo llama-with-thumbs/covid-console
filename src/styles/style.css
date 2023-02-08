@@ -75,6 +75,9 @@ body {
     'updated footer charts charts';
 }
 
+.main-table{
+  background-color: red;
+}
 .header {
   display: flex;
   align-items: center;
@@ -282,7 +285,7 @@ h1 {
 .charts__input {
   grid-area: charts__input;
 }
-.countries {
+.countries,.main-table {
   /* overflow-x: scroll; */
   /* padding-left: 8px;
   padding-right: 4px; */
