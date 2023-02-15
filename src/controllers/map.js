@@ -1,4 +1,3 @@
-
 export let mymap = L.map("map");
 
 const coordinatesMap = {};
@@ -6,7 +5,7 @@ export const coordinates = (countryData) => {
   return countryData.forEach((country) => {
     coordinatesMap[country.altSpellings[0]] = [
       country.latlng[0],
-      country.latlng[1]
+      country.latlng[1],
     ];
   });
 };
@@ -27,33 +26,48 @@ export default function drawMap(countryData, covidData, covidOneNineThree) {
   // console.log(covidOneNineThree);
   // console.log(countryData);
 
-  const fullData = () => countryData.map(restCountryApiCountry => {
-    const covidOneNineThreeCountry = covidOneNineThree.response.find(({country}) => country === restCountryApiCountry.name.common);
-    
-    return {
-      ...restCountryApiCountry,
-      // ...country
-      "population": restCountryApiCountry.population,
-      "countryName": restCountryApiCountry.name.official,
-      "cca2": restCountryApiCountry.cca2,
-      "latlng": restCountryApiCountry.latlng,
-      "totalConfirmed": typeof covidOneNineThreeCountry === 'undefined' ? 0 : covidOneNineThreeCountry.cases.total,
-    };
-  })
+  const fullData = () =>
+    countryData.map((restCountryApiCountry) => {
+      const covidOneNineThreeCountry = covidOneNineThree.response.find(
+        ({ country }) => country === restCountryApiCountry.name.common
+      );
+
+      return {
+        ...restCountryApiCountry,
+        // ...country
+        population: restCountryApiCountry.population,
+        countryName: restCountryApiCountry.name.official,
+        cca2: restCountryApiCountry.cca2,
+        latlng: restCountryApiCountry.latlng,
+        totalConfirmed:
+          typeof covidOneNineThreeCountry === "undefined"
+            ? 0
+            : covidOneNineThreeCountry.cases.total,
+      };
+    });
   // console.log(fullData());
 
-  const data = countryData.map(restCountryApiCountry => {
-    const countryCovidData = covidData.countries.find(({ countryCode }) => countryCode === restCountryApiCountry.cca2);
+  const data = countryData.map((restCountryApiCountry) => {
+    const countryCovidData = covidData.countries.find(
+      ({ countryCode }) => countryCode === restCountryApiCountry.cca2
+    );
     return {
       ...restCountryApiCountry,
+      // ...countryCovidData,
       // ...country
       // "countryName": restCountryApiCountry.name.common,
-      "cca2": restCountryApiCountry.cca2,
-      "latlng": restCountryApiCountry.latlng,
-      "totalConfirmed": typeof countryCovidData === 'undefined' ? 0 : countryCovidData.totalConfirmed
+      cca2: restCountryApiCountry.cca2,
+      latlng: restCountryApiCountry.latlng,
+      totalDeaths:
+        typeof countryCovidData === "undefined"
+          ? 0
+          : countryCovidData.totalDeaths,
+      totalConfirmed:
+        typeof countryCovidData === "undefined"
+          ? 0
+          : countryCovidData.totalConfirmed,
     };
-
-  })
+  });
 
   // console.log(data);
 
@@ -98,12 +112,14 @@ export default function drawMap(countryData, covidData, covidOneNineThree) {
     const geoJsonSecondLayer = {
       type: "FeatureCollection",
       features: data.map((country = {}) => {
-
         // console.log(Math.log2(country.totalConfirmed) * 2 + country.totalConfirmed / 20000);
 
         // console.log(country.population);
         // let km = country.totalConfirmed === 0 ? 10 : Math.log2(country.totalConfirmed) * 2 + country.totalConfirmed / 200000;
-        let km = country.population === 0 ? 10 : Math.log2(country.population) * 2 + country.population / 500000;
+        let km =
+          country.population === 0
+            ? 10
+            : Math.log2(country.population) * 2 + country.population / 500000;
         let points = 64;
         let coords = {
           latitude: country.latlng[0],
@@ -141,16 +157,16 @@ export default function drawMap(countryData, covidData, covidOneNineThree) {
       pointToLayer: (feature = {}, latlng) => {
         const { properties = {} } = feature;
 
-        // console.log(feature);
-        // let updatedFormatted;
-        // let casesString;
-
         const countryName = properties.name.common;
         const population = properties.population;
         const totalConfirmed = properties.totalConfirmed;
         const { flags } = properties;
+        const totalDeaths = properties.totalDeaths;
+        const infectionRate = ((totalConfirmed / population) * 100).toFixed(1);
+        const deathRate = ((totalDeaths / totalConfirmed) * 100).toFixed(2);
 
-        const logCases = Math.log2(totalConfirmed) * 2 + totalConfirmed / 1000000;
+        const logCases =
+          Math.log2(totalConfirmed) * 2 + totalConfirmed / 1000000;
 
         // casesString = `${cases}`;
 
@@ -162,9 +178,6 @@ export default function drawMap(countryData, covidData, covidOneNineThree) {
         //   updatedFormatted = new Date(updated).toLocaleString();
         // }
 
-
-        const deaths = 0;
-
         const html = `
           <span class="icon-marker" data-country-name="${countryName}" style="
           width: ${logCases}px;
@@ -173,14 +186,21 @@ export default function drawMap(countryData, covidData, covidOneNineThree) {
           background: radial-gradient(rgb(70, 130, 180, 1),rgb(70, 130, 180,1), rgba(255,0,0,0), rgba(255,0,0,0));
           ">
             <span class="icon-marker-tooltip">
-              <h2>${countryName}<img class="county-flag" src="${flags[1]}" height="10" width="15" alt="flag"></h2>
+              <h2>${countryName}<img class="county-flag" src="${
+          flags[1]
+        }" height="10" width="15" alt="flag"></h2>
               <ul>
                 <li><strong>Population:</strong> ${population.toLocaleString()}</li>
                 <li><strong>Total number of cases:</strong> ${totalConfirmed.toLocaleString()}</li>
-                <li><strong>Deaths:</strong> ${deaths.toLocaleString()}</li>
+                <li><strong>Deaths:</strong> ${totalDeaths.toLocaleString()}</li>
+                <li><strong>infection rate:</strong> ${infectionRate.toLocaleString()}%</li>
+                <li><strong>Death rate:</strong> ${deathRate.toLocaleString()}%</li>
+
               </ul>
             </span>
-            <h2>${countryName}<img class="county-flag" src="${flags[1]}" height="10" width="15" alt="flag"></h2>
+            <h2>${countryName}<img class="county-flag" src="${
+          flags[1]
+        }" height="10" width="15" alt="flag"></h2>
           </span>
         `;
 
@@ -199,8 +219,6 @@ export default function drawMap(countryData, covidData, covidOneNineThree) {
     geoJsonLayerOne.addTo(mymap);
 
     geoJsonLayerTwo.addTo(mymap);
-
-
   }
   getData(data);
   mymap.setView([50, 10], 5);

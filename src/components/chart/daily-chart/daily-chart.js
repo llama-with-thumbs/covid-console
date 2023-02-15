@@ -64,8 +64,10 @@ export default function dailyChart(country, data) {
       .tickFormat(yAxisTickFormat)
       .tickSize(-innerWidth);
 
-    g.append("g").attr("class", "y axis").call(yAxis);
     g.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+      .append("g")
       .attr("class", "x axis")
       .call(xAxis)
       .attr("transform", `translate(0,${innerHeight})`);
@@ -79,9 +81,7 @@ export default function dailyChart(country, data) {
       .attr("x", (d) => xScale(xValue(d)))
       .attr("height", (d) => innerHeight - yScale(yValue(d)))
       .attr("width", xScale.bandwidth())
-      .attr("y", (d) => yScale(yValue(d)));
-
-    rect
+      .attr("y", (d) => yScale(yValue(d)))
       .append("svg:title")
       .text(
         (d) =>
@@ -114,7 +114,7 @@ export default function dailyChart(country, data) {
   };
 
   if (country === "total") {
-      render(data);
+    render(data);
   } else {
     let previousDayNumber = 0;
     const newData = data.map((d) => {
@@ -124,5 +124,6 @@ export default function dailyChart(country, data) {
     });
     render(newData);
   }
+
   return " ";
 }
